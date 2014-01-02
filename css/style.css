@@ -7,18 +7,23 @@
   outline: 0;
 }
 
-html,
 body {
   height: 100%;
   margin: 0;
-    overflow-x:hidden;
+overflow-x:hidden;
 }
+html {
+  margin: 0;
+overflow-x:hidden;
+}
+
+
 
 .colour {
   z-index: 1;
   display: block;
   width: 100%;
-  height: 100%;
+  height: 205%;
   font-size: 5em;
   font-weight: 700;
   line-height: 1200%;
@@ -45,3 +50,7 @@ body {
     color:#fefefe;
 }
 
+a:hover, a:visited, a:link, a:active
+{    color: #fefefe;
+    text-decoration: none;
+}
