@@ -1,5 +1,6 @@
+var pred;
 $.getJSON("js/colours.json", function (data) {
-    var pred = sortColours(data, 0, 0.7);
+    pred = sortColours(data, 0, 0.7);
     for (var key in pred) {
         if (pred.hasOwnProperty(key)) {
             if (pred[key].hue > -1) {
