@@ -1,11 +1,11 @@
-var pred;
+var sortedColours;
 $.getJSON("js/colours.json", function (data) {
-    pred = sortColours(data, 0, 0.7);
-    for (var key in pred) {
-        if (pred.hasOwnProperty(key)) {
-            if (pred[key].hue > -1) {
-                console.log("%c" + pred[key].hex + "     Hue:    " + pred[key].hue + "     Chr:    " + pred[key].chr + "    Name: " + pred[key].name + "     Sat:    " + pred[key].sat, "width:200%;background-color:" + pred[key].hex);
-                $("body").append("<span class='colour colour-" + pred[key].name + "' style='background-color:" + pred[key].hex + "'><a href='http://dribbble.com/colors/" + pred[key].nohash + "?percent=5&variance=5' target='_blank' class='colourtext'>" + pred[key].hex + "</a></span>");
+    sortedColours = sortColours(data, 0, 0.7);
+    for (var key in sortedColours) {
+        if (sortedColours.hasOwnProperty(key)) {
+            if (sortedColours[key].hue > -1) {
+                console.log("%c" + sortedColours[key].hex + "     Hue:    " + sortedColours[key].hue + "     Chr:    " + sortedColours[key].chr + "    Name: " + sortedColours[key].name + "     Sat:    " + sortedColours[key].sat, "width:200%;background-color:" + sortedColours[key].hex);
+                $("body").append("<span class='colour colour-" + sortedColours[key].name + "' style='background-color:" + sortedColours[key].hex + "'><a href='http://dribbble.com/colors/" + sortedColours[key].nohash + "?percent=5&variance=5' target='_blank' class='colourtext'>" + sortedColours[key].hex + "</a></span>");
             }
         }
     }
@@ -13,24 +13,19 @@ $.getJSON("js/colours.json", function (data) {
     $("body").append("<form class='colour' action='js/add.php' method='get' autocomplete='off' style='background-color:#fefefe'><input type='text' name='hex' value='#HEXHRE' class='hexinput'></form>");
 });
 
-function scrollColours(colour) {
-    $('html, body').animate({
-        scrollTop: $(".colour-" + colour).offset().top
-    }, 150);
+function scrollItems(number) {
+    window.scrollBy(0, $(window).height() * number);
 }
 
-function scrollDistance() {
-    if ($(window).scrollTop() % $(window).height() === 6) {
-        $('html, body').animate({
-            scrollTop: ($(window).scrollTop() + ($(window).height()) * 4)
-        }, 150);
-    } else {
-
-        $('html, body').animate({
-            scrollTop: $(window).scrollTop() + $(window).height() - $(window).scrollTop() % $(window).height()
-        }, 150);
-    }
-
+function itemAt() {
+    var pageHeight = window.innerHeight ||
+        html.clientHeight ||
+        body.clientHeight ||
+        screen.availHeight;
+    var scrolled = document.all ? iebody.scrollTop : pageYOffset;
+    var numberOfItems = sortColours.length;
+    
+    return sortedColours[Math.floor(scrolled/pageHeight*(numberOfItems+1))];
 }
 
 function sortColours(colours, satval, valval) {
@@ -90,7 +85,7 @@ function sortColours(colours, satval, valval) {
                     } else if (hue >= 320 && hue < 345) {
                         var colorname = "pink";
                     } else if (hue >= 345 && hue < 356) {
-                        var colorname = "pred";
+                        var colorname = "sortedColours";
                     }
 
 
@@ -121,5 +116,5 @@ function sortColours(colours, satval, valval) {
 }
 
 $('.arrow').click(function () {
-    scrollDistance();
+    scrollItems(1);
 });
